@@ -30,3 +30,7 @@ body{
     right:15px;
     cursor: pointer;
 }
+.notifyContent{
+    color:#fff;
+    font-size:14px;
+}
