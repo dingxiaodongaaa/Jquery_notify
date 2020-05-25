@@ -7,19 +7,31 @@ body{
     width:100%;
     height:100%;
     overflow:hidden;
+    position: relative;
+}
+.notifyWarnningBox{
+    position: absolute;
+    right:0;
+    display: inline-block;
+    height:calc(100% - 50px)
 }
 .notifyContainer{
-    position:absolute;
+    position: relative;;
+    right:-330px;
+    opacity:0;
     width:330px;
     height:100px;
-    right:-330px;
     padding: 14px 34px 14px 13px;
+    margin-bottom:16px;
     border-radius: 8px;
     box-sizing: border-box;
     border: 1px solid #ebeef5;
     background-color: #003452;
     box-shadow: 0 2px 12px 0 #87CEEB;
-    transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s;
+    transition: all 0.5s;
+    -o-transition: all 0.5s; /*兼容parsto内核*/
+    -moz-transition: all 0.5s; /*兼容gecko内核*/
+    -webkit-transition: all 0.5s; /*兼容webkit内核*/
     overflow: hidden;
 }
 .closeNotify{

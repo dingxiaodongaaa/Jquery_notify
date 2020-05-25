@@ -11,16 +11,19 @@ $(function() {
     var autoHideIntervalArr = [];
 
     $(".notifyWarnning").click(function(){
-        $("body").append(`<div class="notifyContainer index_${notifyIndex}">
+        $(".notifyWarnningBox").append(`<div class="notifyContainer index_${notifyIndex}">
                 <img class="closeNotify" src="./notification/images/closeNotify.png" alt="">
                 <div class="notifyContent">回复靠的就是复合肥肯定是福克斯的家伙付款后都是空 粉红色的疯狂的缩进符号放得开首付款后SDK</div>
             </div>`);
         let notifyContainerLi = $('.notifyContainer');
-        notifyContainerLi.eq(notifyContainerLi.length - 1).css("top",nextTop);
-        notifyContainerLi.eq(notifyContainerLi.length - 1).animate({"right":10}, { duration: 2, queue: false})
+        // notifyContainerLi.eq(notifyContainerLi.length - 1).css("top",nextTop);
+        setTimeout(function(){
+            notifyContainerLi.eq(notifyContainerLi.length - 1).css("right", 10).css("opacity", 1)
+        },100)
+        
         //更新下一个弹窗的起始top值
-        let thisHeight = notifyContainerLi.eq(notifyContainerLi.length - 1).outerHeight();
-        nextTop = nextTop + thisHeight + intervalTop;
+        // let thisHeight = notifyContainerLi.eq(notifyContainerLi.length - 1).outerHeight();
+        // nextTop = nextTop + thisHeight + intervalTop;
         //给弹窗添加自己的自动消失定时器
         autoHideIntervalArr[notifyIndex] = setInterval(function(){
             let index = notifyIndex;
@@ -35,19 +38,23 @@ $(function() {
     $("body").on("click",".closeNotify",function(){
         let thisNotifyContainer = $(this).parent(".notifyContainer");
         //立即更新下一个窗口的top值
-        let thisHeight = thisNotifyContainer.outerHeight();
-        nextTop = nextTop - thisHeight - intervalTop;
+        // let thisHeight = thisNotifyContainer.outerHeight();
+        // nextTop = nextTop - thisHeight - intervalTop;
         //计算元素上移的距离
-        let moveDistance = thisHeight + intervalTop;
+        // let moveDistance = thisHeight + intervalTop;
         //获取下面的弹窗元素，删除之后上移
-        let nextAllNotifyContainer = thisNotifyContainer.nextAll(".notifyContainer");
+        // let nextAllNotifyContainer = thisNotifyContainer.nextAll(".notifyContainer");
         //移动下面的元素
-        thisNotifyContainer.animate({opacity:0}, { duration: 2, queue: false , complete:function(){
+        // thisNotifyContainer.animate({opacity:0}, { duration: 2, queue: false , complete:function(){
                 //删除关闭的弹窗元素
-                thisNotifyContainer.remove();
-            }})
-        for(let i = 0; i < nextAllNotifyContainer.length; i++){
-            nextAllNotifyContainer.eq(i).animate({top:`-=${moveDistance}px`}, { duration: 2, queue: false  })
-        }
+                thisNotifyContainer.css("right", -330)
+                thisNotifyContainer.css("opacity", 0)
+                setTimeout(function(){
+                    thisNotifyContainer.remove();
+                },400)
+            // }})
+        // for(let i = 0; i < nextAllNotifyContainer.length; i++){
+            // nextAllNotifyContainer.eq(i).animate({top:`-=${moveDistance}px`}, { duration: 2, queue: false  })
+        // }
     })
 });
